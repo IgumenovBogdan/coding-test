@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useKanbanStore = defineStore('kanban', {
   state: () => {
-    return { 
+    return {
         hoveredName: 'nothing',
         selectedTask: null,
         phases: [],
@@ -12,6 +12,11 @@ export const useKanbanStore = defineStore('kanban', {
           name: '',
           phase_id: null,
           user_id: null,
+        },
+        editingTaskProps: {
+            name: '',
+            phase_id: null,
+            user_id: null,
         },
         self: null,
     }

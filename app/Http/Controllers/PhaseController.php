@@ -63,4 +63,12 @@ class PhaseController extends Controller
     {
         //
     }
+
+    public function toggleIsCompletive(Phase $phase)
+    {
+        $phase->is_completive = !$phase->is_completive;
+        $phase->save();
+
+        return $phase;
+    }
 }

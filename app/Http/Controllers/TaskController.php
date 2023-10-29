@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
+use Illuminate\Http\JsonResponse;
 
 class TaskController extends Controller
 {
@@ -19,7 +20,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return \App\Models\Phase::with('tasks.user')->get();
+        return \App\Models\Phase::with('tasks.user')->withCount('tasks')->get();
     }
 
     /**
@@ -66,9 +67,11 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTaskRequest $request, Task $task)
+    public function update(UpdateTaskRequest $request, Task $task): JsonResponse
     {
-        //
+        $task->update($request->only('name', 'phase_id', 'user_id'));
+
+        return response()->json($task);
     }
 
     /**
