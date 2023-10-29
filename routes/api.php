@@ -24,3 +24,5 @@ Route::middleware('auth:sanctum')->put('/tasks/{task}', [App\Http\Controllers\Ta
 Route::middleware('auth:sanctum')->get('/users', [App\Http\Controllers\TaskController::class, 'users']);
 Route::middleware('auth:sanctum')->get('/phases/{phase}', [App\Http\Controllers\PhaseController::class, 'show']);
 Route::middleware('auth:sanctum')->patch('/phases/completive-toggle/{phase}', [App\Http\Controllers\PhaseController::class, 'toggleIsCompletive']);
+Route::middleware('auth:sanctum')->delete('/phases/mass-task-deletion/{phase}', [App\Http\Controllers\PhaseController::class, 'deleteAllTasks']);
+Route::middleware('auth:sanctum')->get('/statistics', [App\Http\Controllers\StatiscticsController::class, 'index']);

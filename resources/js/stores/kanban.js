@@ -34,5 +34,17 @@ export const useKanbanStore = defineStore('kanban', {
     hasSelectedTask() {
         return this.selectedTask !== null
     },
+      async refreshTasks() {
+        try {
+            const response = await axios.get('/api/tasks');
+            const originalTasks = response.data;
+            this.phases = originalTasks.reduce((acc, cur) => {
+                acc[cur.id] = cur;
+                return acc;
+            }, {});
+        } catch (error) {
+            console.error('There was an error fetching the tasks!', error);
+        }
+      }
   },
 })

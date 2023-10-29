@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatiscticsController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/tasks', [TaskController::class, 'kanban'])->name('tasks.index');
     Route::resource('tasks', TaskController::class)->except(['index', 'show']);
+    Route::get('/statistics', [StatiscticsController::class, 'statistics'])->name('tasks.statistics');
 });
 
 require __DIR__.'/auth.php';

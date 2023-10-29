@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePhaseRequest;
 use App\Http\Requests\UpdatePhaseRequest;
 use App\Models\Phase;
+use Illuminate\Http\JsonResponse;
 
 class PhaseController extends Controller
 {
@@ -69,6 +70,13 @@ class PhaseController extends Controller
         $phase->is_completive = !$phase->is_completive;
         $phase->save();
 
-        return $phase;
+        return response()->json($phase);
+    }
+
+    public function deleteAllTasks(Phase $phase): JsonResponse
+    {
+        return response()->json([
+            'data' => $phase->tasks()->delete()
+        ]);
     }
 }
